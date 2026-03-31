@@ -22,7 +22,7 @@ export default function AIDoubtChat() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // ✅ Auto scroll to latest message
+    // Auto scroll to latest message
     const messagesEndRef = useRef(null);
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -32,16 +32,16 @@ export default function AIDoubtChat() {
         const text = input.trim();
         if (!text) return;
 
-        // ✅ Add user message to chat
+        // Add user message to chat
         setMessages((prev) => [...prev, { sender: 'user', text }]);
         setInput('');
 
-        // ✅ Show "Thinking..." placeholder
+        // Show "Thinking..." placeholder
         setMessages((prev) => [...prev, { sender: 'bot', text: 'Thinking...' }]);
         setLoading(true);
         setError(null);
 
-        // ✅ Call FastAPI backend
+        // Call FastAPI backend
         fetchAIReply(text)
             .then((reply) => {
                 // Replace "Thinking..." with actual reply
@@ -58,7 +58,7 @@ export default function AIDoubtChat() {
             })
             .catch((err) => {
                 console.error('AI reply error:', err);
-                // ✅ Replace "Thinking..." with error message
+                // Replace "Thinking..." with error message
                 setMessages((prev) => {
                     const msgs = [...prev];
                     const idx = msgs.map((m) => m.text).lastIndexOf('Thinking...');
@@ -76,12 +76,12 @@ export default function AIDoubtChat() {
             .finally(() => setLoading(false));
     };
 
-    // ✅ Send on Enter key
+    // Send on Enter key
     const handleKeyDown = (e) => {
         if (e.key === 'Enter' && !loading) handleSend();
     };
 
-    // ✅ Click suggested topic → fill input
+    // Click suggested topic → fill input
     const handleTopicClick = (topic) => {
         setInput(topic);
     };
@@ -103,7 +103,7 @@ export default function AIDoubtChat() {
                             <div className="chat-bubble-label">
                                 {msg.sender === 'bot' ? '🤖 AI Tutor' : '🧑‍🎓 You'}
                             </div>
-                            {/* ✅ Newlines show properly */}
+                            {/* Newlines show properly */}
                             {msg.text.split('\n').map((line, j) => (
                                 <span key={j}>
                                     {line}
@@ -112,7 +112,7 @@ export default function AIDoubtChat() {
                             ))}
                         </div>
                     ))}
-                    {/* ✅ Auto scroll ref */}
+                    {/* Auto scroll ref */}
                     <div ref={messagesEndRef} />
                 </div>
 
@@ -161,7 +161,7 @@ export default function AIDoubtChat() {
     );
 }
 
-// ✅ FastAPI backend se reply fetch karna
+// FastAPI backend se reply fetch karna
 async function fetchAIReply(userText) {
     const res = await fetch('/api/ai-chat', {
         method: 'POST',
