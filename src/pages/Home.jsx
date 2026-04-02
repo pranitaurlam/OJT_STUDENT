@@ -56,10 +56,10 @@ export default function Home() {
                         comprehensive educational platform
                     </p>
                     <div className="hero-buttons">
-                        <Link to="/dashboard">
+                        <Link to="/login">
                             <button className="btn-primary">Get Started Free</button>
                         </Link>
-                        <Link to="/dashboard">
+                        <Link to="/login">
                             <button className="btn-secondary">Sign In</button>
                         </Link>
                     </div>
@@ -87,7 +87,7 @@ export default function Home() {
                 <div className="cta-banner">
                     <h2>Ready to Transform Your Learning?</h2>
                     <p>Join thousands of students already using MindForge Academy</p>
-                    <Link to="/dashboard">
+                    <Link to="/login">
                         <button className="btn-cta">Start Learning Today</button>
                     </Link>
                 </div>
